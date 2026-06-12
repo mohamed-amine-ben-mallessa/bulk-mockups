@@ -93,6 +93,7 @@ smart-object workflow and the gotchas, so it gets mockup generation right the fi
 
 - 🎨 **[photopea-as-code](https://github.com/mohamed-amine-ben-mallessa/photopea-as-code)** — the full Photopea-as-code toolkit + scripting reference.
 - 📱 **[social-post-factory](https://github.com/mohamed-amine-ben-mallessa/social-post-factory)** — branded social posts in one command.
+- 🔄 **[batch-image-converter](https://github.com/mohamed-amine-ben-mallessa/batch-image-converter)** — convert/resize a whole folder, locally, no upload.
 
 ## Credits
 
