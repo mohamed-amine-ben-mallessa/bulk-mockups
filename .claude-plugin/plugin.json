@@ -1,0 +1,14 @@
+{
+  "name": "bulk-mockups",
+  "version": "0.1.0",
+  "description": "One PSD template into many finished mockups by swapping a smart object's contents — free, no Photoshop. Print-on-demand, Etsy, ad creatives, app screenshots.",
+  "author": "bulk-mockups contributors",
+  "license": "MIT",
+  "keywords": ["mockup", "psd", "smart-object", "batch", "print-on-demand", "photopea", "agent-skill"],
+  "mcpServers": {
+    "photopea": {
+      "command": "npx",
+      "args": ["-y", "photopea-mcp-server"]
+    }
+  }
+}
