@@ -2,7 +2,7 @@
 
 <p align="center">
   <b>One PSD template → hundreds of finished mockups.</b><br>
-  Drop your designs into a smart object and export one mockup each — free, no Photoshop, no subscription.
+  Drop a folder of designs into a smart object, get one polished mockup each. Free, no Photoshop, no subscription.
 </p>
 
 <p align="center">
@@ -13,22 +13,33 @@
   <img src="https://img.shields.io/badge/license-MIT-yellow" alt="MIT">
 </p>
 
+**Claude Code:**
+
+```
+/plugin marketplace add mohamed-amine-ben-mallessa/bulk-mockups
+/plugin install bulk-mockups
+```
+
+**Codex, Cursor, Copilot, Gemini CLI, or any of 50+ [Agent Skills](https://agentskills.io) hosts:**
+
+```
+npx skills add mohamed-amine-ben-mallessa/bulk-mockups -g
+```
+
 ---
 
-> **Print-on-demand, Etsy, app screenshots, ad creatives — all need the same thing:**
-> your artwork, dropped into a mockup template, exported again and again. Photoshop's
-> "smart object" does it, but Photoshop costs money. **Photopea does it for free** — and
-> this repo scripts it so you can do **hundreds at once.**
+## Why this exists
 
-## The idea
+**Print-on-demand, Etsy, app screenshots, ad creatives — they all need the same thing:**
+your artwork, dropped into a mockup template, exported. Again. And again.
 
-A mockup PSD has a **smart object** — a placeholder layer (the t-shirt front, the phone
-screen, the picture frame). Replace its contents and everything else (lighting, shadows,
-perspective, warp) is reused. This repo loops that over a folder of designs.
+Photoshop's smart objects do it beautifully, and Photoshop costs money. **Photopea does the
+exact same thing for free, in a browser** — and it's scriptable. This repo scripts it, so
+30 designs cost you one command instead of an afternoon.
 
 | Doing it by hand in Photoshop | **bulk-mockups** |
 |---|---|
-| Open PSD, double-click SO, paste, save, export — per design | **One command** for the whole folder |
+| Open PSD, double-click SO, paste, save, export — *per design* | **One command** for the whole folder |
 | Needs a paid Photoshop license | **Free** (Photopea, in the browser) |
 | 30 designs = 30× manual labor | 30 designs = `python bulk_mockups.py …` |
 | Easy to make inconsistent exports | **Identical** export settings every time |
@@ -48,11 +59,13 @@ python scripts/bulk_mockups.py  template.psd  "MOCKUP_SMART_OBJECT"  designs/  o
 A browser window opens (that's Photopea — expected). Each design is dropped into the smart
 object and exported.
 
+No mockup PSD yet? [photopea.com/templates](https://www.photopea.com/templates/) has free ones.
+
 ## How it works (the verified script)
 
-Photopea exposes the Photoshop action `placedLayerEditContents` to open a smart object's
-internal source. We open it, replace the artwork, save (which updates every instance),
-close, and export:
+The trick is one Photoshop action Photopea also implements: `placedLayerEditContents` opens a
+smart object's internal source. Open it, replace the artwork, save — and **every instance in
+the document updates**, keeping the template's lighting, shadow, perspective and warp:
 
 ```javascript
 var l = app.activeDocument.layers.getByName("MOCKUP_SMART_OBJECT");
@@ -76,24 +89,38 @@ If a template resists scripted replacement, use Photopea's built-in batch:
    design filename).
 4. **Export as** → format → you get a **ZIP**, one rendered mockup per CSV row.
 
+## Install
+
+| Surface | Install | Updates |
+|---|---|---|
+| **Claude Code** (recommended) | `/plugin marketplace add mohamed-amine-ben-mallessa/bulk-mockups` then `/plugin install bulk-mockups` | `claude plugin update bulk-mockups` |
+| **Codex, Cursor, Copilot, Gemini CLI, or any of 50+ [Agent Skills](https://agentskills.io) hosts** | `npx skills add mohamed-amine-ben-mallessa/bulk-mockups -g` | `npx skills update bulk-mockups -g` |
+| **Any MCP agent** | Point it at [`skills/bulk-mockups/SKILL.md`](skills/bulk-mockups/SKILL.md) | `git pull` |
+| **Plain Python** (no agent) | `git clone https://github.com/mohamed-amine-ben-mallessa/bulk-mockups` then run `scripts/bulk_mockups.py` | `git pull` |
+
+**Requirements:** Node (for `npx`) and Python ≥ 3.8. No API key, no account, no Photoshop.
+
 ## Tips
 
 - Match each design's aspect ratio to the smart object to avoid distortion.
 - Name outputs after the source design (this repo does, for traceability).
 - For dozens+ of designs, the loop here or **Variables** both work; Variables is the most
   robust for very large batches.
-- Get free mockup PSDs from [photopea.com/templates](https://www.photopea.com/templates/).
 
 ## For AI agents
 
 [`skills/bulk-mockups/SKILL.md`](skills/bulk-mockups/SKILL.md) teaches an agent the exact
-smart-object workflow and the gotchas, so it gets mockup generation right the first time.
+smart-object workflow and the gotchas, so "put all of these on the t-shirt mockup" works
+the first time.
 
-## Related
+## The pack
 
-- 🎨 **[photopea-as-code](https://github.com/mohamed-amine-ben-mallessa/photopea-as-code)** — the full Photopea-as-code toolkit + scripting reference.
-- 📱 **[social-post-factory](https://github.com/mohamed-amine-ben-mallessa/social-post-factory)** — branded social posts in one command.
-- 🔄 **[batch-image-converter](https://github.com/mohamed-amine-ben-mallessa/batch-image-converter)** — convert/resize a whole folder, locally, no upload.
+| | Repo | One job |
+|---|---|---|
+| 🖼️ | **bulk-mockups** (this) | 1 PSD → hundreds of mockups via smart objects |
+| 🎨 | [photopea-as-code](https://github.com/mohamed-amine-ben-mallessa/photopea-as-code) | The driver, the recipes, the full scripting reference |
+| 📱 | [social-post-factory](https://github.com/mohamed-amine-ben-mallessa/social-post-factory) | One brand theme → square, story, banner |
+| 🔄 | [batch-image-converter](https://github.com/mohamed-amine-ben-mallessa/batch-image-converter) | A whole folder converted/resized, 100% locally |
 
 ## Credits
 
@@ -104,3 +131,9 @@ not affiliated with Photopea or Adobe. Trademarks belong to their owners.
 ## License
 
 MIT.
+
+---
+
+<p align="center">
+  <sub>Built by <a href="https://github.com/mohamed-amine-ben-mallessa">Mohamed Amine Ben Mallessa</a> · ⭐ star it if it saved you an afternoon</sub>
+</p>
